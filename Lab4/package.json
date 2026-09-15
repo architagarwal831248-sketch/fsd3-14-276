@@ -1,11 +1,11 @@
 {
-  "name": "lab4",
+  "name": "Lab4",
   "version": "1.0.0",
   "description": "1. create project folder\r 2. right click on project folder and select open\r integrated terminal\r ![alt text](./image.png)\r 3. type in terminal 'npm init -y' press eneter\r 4. open packages.json file from project folder\r 5. update type as ` module ` in package.json\r ![alt text](./image-1.png)",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemonapp.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
