@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BlueConnect - Bluetooth Devices</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #080b12;
+            color: white;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 75px;
+            background-color: #10141d;
+            border-bottom: 1px solid #252b38;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 8%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #35bfff;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #bfc5d1;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #35bfff;
+        }
+
+        .nav-btn {
+            background-color: #35bfff;
+            color: #061018;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 650px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 70px 10%;
+
+            background:
+                radial-gradient(circle at 80% 40%, #12324a 0%, #080b12 45%);
+        }
+
+        .hero-content {
+            width: 55%;
+        }
+
+        .small-title {
+            color: #35bfff;
+            font-size: 15px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #35bfff;
+        }
+
+        .hero p {
+            color: #aeb6c4;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .primary-btn {
+            padding: 14px 28px;
+            background-color: #35bfff;
+            color: #061018;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .secondary-btn {
+            padding: 14px 28px;
+            border: 1px solid #3b4555;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .secondary-btn:hover {
+            border-color: #35bfff;
+            color: #35bfff;
+        }
+
+        /* ================= BLUETOOTH ICON ================= */
+
+        .bluetooth-circle {
+            width: 330px;
+            height: 330px;
+
+            border-radius: 50%;
+
+            border: 1px solid #21445b;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow:
+                0 0 40px #0d3045,
+                inset 0 0 40px #0d1e2b;
+        }
+
+        .bluetooth-symbol {
+            font-size: 150px;
+            color: #35bfff;
+            text-shadow: 0 0 30px #35bfff;
+        }
+
+        /* ================= SEARCH ================= */
+
+        .search-section {
+            padding: 60px 10%;
+            background-color: #0c1018;
+            text-align: center;
+        }
+
+        .search-section h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .search-section p {
+            color: #8993a3;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            max-width: 650px;
+            margin: auto;
+
+            display: flex;
+
+            background-color: #151b25;
+            border: 1px solid #2c3544;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            outline: none;
+
+            background-color: transparent;
+            color: white;
+
+            font-size: 16px;
+        }
+
+        .search-box button {
+            padding: 0 25px;
+
+            border: none;
+            background-color: #35bfff;
+            color: #061018;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ================= DEVICES ================= */
+
+        .devices {
+            padding: 80px 10%;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 40px;
+        }
+
+        .section-heading h2 {
+            font-size: 35px;
+        }
+
+        .section-heading a {
+            color: #35bfff;
+            text-decoration: none;
+        }
+
+        .device-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+
+            gap: 25px;
+        }
+
+        .device-card {
+            background-color: #111722;
+
+            border: 1px solid #252d3a;
+
+            border-radius: 12px;
+
+            padding: 28px;
+
+            transition: 0.3s;
+        }
+
+        .device-card:hover {
+            transform: translateY(-6px);
+            border-color: #35bfff;
+            box-shadow: 0 10px 30px #05090f;
+        }
+
+        .device-icon {
+            width: 60px;
+            height: 60px;
+
+            border-radius: 12px;
+
+            background-color: #182737;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+        }
+
+        .device-card h3 {
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .device-card .type {
+            color: #778394;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #55d98b;
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #55d98b;
+        }
+
+        .connect-btn {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #344052;
+            border-radius: 6px;
+
+            background-color: transparent;
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .connect-btn:hover {
+            background-color: #35bfff;
+            color: #061018;
+            border-color: #35bfff;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            padding: 80px 10%;
+            background-color: #0c1018;
+        }
+
+        .features-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .features-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .features-title p {
+            color: #8993a3;
+        }
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 25px;
+        }
+
+        .feature {
+            padding: 30px;
+
+            background-color: #111722;
+
+            border-radius: 10px;
+
+            border: 1px solid #252d3a;
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            color: #8e98a8;
+            line-height: 1.6;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            padding: 70px 10%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(180px, 1fr));
+
+            gap: 20px;
+
+            text-align: center;
+        }
+
+        .stat {
+            padding: 25px;
+        }
+
+        .stat h2 {
+            font-size: 40px;
+            color: #35bfff;
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+            color: #8993a3;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            margin: 50px 10% 80px;
+
+            padding: 70px 40px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(135deg, #102b3d, #101722);
+
+            border: 1px solid #25445a;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: #9da7b5;
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background-color: #0a0d13;
+
+            border-top: 1px solid #252b36;
+
+            padding: 50px 10% 25px;
+        }
+
+        .footer-content {
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr;
+
+            gap: 40px;
+
+            margin-bottom: 40px;
+        }
+
+        footer h3 {
+            margin-bottom: 18px;
+        }
+
+        footer p {
+            color: #7f8998;
+            line-height: 1.6;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer ul li {
+            margin-bottom: 12px;
+        }
+
+        footer ul li a {
+            text-decoration: none;
+            color: #858e9c;
+        }
+
+        footer ul li a:hover {
+            color: #35bfff;
+        }
+
+        .copyright {
+            padding-top: 25px;
+            border-top: 1px solid #202632;
+
+            text-align: center;
+
+            color: #667080;
+            font-size: 14px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+            }
+
+            .hero-content {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .bluetooth-circle {
+                width: 230px;
+                height: 230px;
+            }
+
+            .bluetooth-symbol {
+                font-size: 100px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Blue<span>Connect</span>
+        </div>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#devices">Devices</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/enquiry">Enquiry</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#devices" class="nav-btn">
+            Connect
+        </a>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                Wireless Technology
+            </div>
+
+            <h1>
+                Connect Your World
+                <span>Wirelessly.</span>
+            </h1>
+
+            <p>
+                Discover, manage and connect your Bluetooth devices
+                with a simple and modern interface. Enjoy seamless
+                wireless connectivity for headphones, speakers,
+                keyboards, smart devices and more.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#devices" class="primary-btn">
+                    Explore Devices
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    Learn More
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="bluetooth-circle">
+
+            <div class="bluetooth-symbol">
+                ♢
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SEARCH ================= -->
+
+    <section class="search-section">
+
+        <h2>Find Your Device</h2>
+
+        <p>
+            Search for nearby Bluetooth devices and manage your connections.
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                placeholder="Search Bluetooth devices..."
+            >
+
+            <button>
+                Search
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DEVICES ================= -->
+
+    <section class="devices" id="devices">
+
+        <div class="section-heading">
+
+            <h2>Available Devices</h2>
+
+            <a href="#">
+                View All →
+            </a>
+
+        </div>
+
+
+        <div class="device-grid">
+
+
+            <div class="device-card">
+
+                <div class="device-icon">
+                    🎧
+                </div>
+
+                <h3>Wireless Headphones</h3>
+
+                <p class="type">
+                    Audio Device
+                </p>
+
+                <div class="status">
+                    <span class="dot"></span>
+                    Available
+                </div>
+
+                <button class="connect-btn">
+                    Connect Device
+                </button>
+
+            </div>
+
+
+            <div class="device-card">
+
+                <div class="device-icon">
+                    🔊
+                </div>
+
+                <h3>Smart Speaker</h3>
+
+                <p class="type">
+                    Audio Device
+                </p>
+
+                <div class="status">
+                    <span class="dot"></span>
+                    Available
+                </div>
+
+                <button class="connect-btn">
+                    Connect Device
+                </button>
+
+            </div>
+
+
+            <div class="device-card">
+
+                <div class="device-icon">
+                    ⌨️
+                </div>
+
+                <h3>Bluetooth Keyboard</h3>
+
+                <p class="type">
+                    Input Device
+                </p>
+
+                <div class="status">
+                    <span class="dot"></span>
+                    Available
+                </div>
+
+                <button class="connect-btn">
+                    Connect Device
+                </button>
+
+            </div>
+
+
+            <div class="device-card">
+
+                <div class="device-icon">
+                    🖱️
+                </div>
+
+                <h3>Wireless Mouse</h3>
+
+                <p class="type">
+                    Input Device
+                </p>
+
+                <div class="status">
+                    <span class="dot"></span>
+                    Available
+                </div>
+
+                <button class="connect-btn">
+                    Connect Device
+                </button>
+
+            </div>
+
+
+            <div class="device-card">
+
+                <div class="device-icon">
+                    🎮
+                </div>
+
+                <h3>Game Controller</h3>
+
+                <p class="type">
+                    Gaming Device
+                </p>
+
+                <div class="status">
+                    <span class="dot"></span>
+                    Available
+                </div>
+
+                <button class="connect-btn">
+                    Connect Device
+                </button>
+
+            </div>
+
+
+            <div class="device-card">
+
+                <div class="device-icon">
+                    ⌚
+                </div>
+
+                <h3>Smart Watch</h3>
+
+                <p class="type">
+                    Wearable Device
+                </p>
+
+                <div class="status">
+                    <span class="dot"></span>
+                    Available
+                </div>
+
+                <button class="connect-btn">
+                    Connect Device
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features" id="features">
+
+        <div class="features-title">
+
+            <h2>Everything You Need</h2>
+
+            <p>
+                Simple tools for managing your wireless devices.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📡
+                </div>
+
+                <h3>Fast Discovery</h3>
+
+                <p>
+                    Quickly find nearby Bluetooth devices and
+                    see their connection status in one place.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔐
+                </div>
+
+                <h3>Secure Connection</h3>
+
+                <p>
+                    Keep your wireless connections private with
+                    secure Bluetooth pairing.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>Low Power</h3>
+
+                <p>
+                    Bluetooth technology provides efficient
+                    wireless communication while saving power.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🌐
+                </div>
+
+                <h3>Wide Compatibility</h3>
+
+                <p>
+                    Connect headphones, speakers, keyboards,
+                    controllers and many other devices.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <h2>100+</h2>
+
+            <p>
+                Supported Devices
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>99%</h2>
+
+            <p>
+                Connection Success
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>24/7</h2>
+
+            <p>
+                Wireless Connectivity
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>4.9★</h2>
+
+            <p>
+                User Experience
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <h2>
+            Ready to Connect?
+        </h2>
+
+        <p>
+            Bring all your Bluetooth devices together and
+            experience a cleaner, simpler way to manage your
+            wireless connections.
+        </p>
+
+        <a href="#devices" class="primary-btn">
+            Start Connecting
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="contact">
+
+        <div class="footer-content">
+
+
+            <div id="about">
+
+                <h3 class="logo">
+                    BlueConnect
+                </h3>
+
+                <p>
+                    A modern Bluetooth device management
+                    interface designed for simple and seamless
+                    wireless connectivity.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Product</h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#devices">
+                            Devices
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#features">
+                            Features
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Compatibility
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Updates
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>Company</h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#about">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Privacy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Terms
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Support
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>Connect</h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#">
+                            Instagram
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Twitter
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            LinkedIn
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Email Us
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 BlueConnect. All Rights Reserved.
+
+        </div>
+
+    </footer>
+
+
+</body>
+</html>
