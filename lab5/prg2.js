@@ -16,7 +16,7 @@ app.use(express.static(path.join(dirname, "frontend")));
 
 app.use((req, res) => {
 
-| res.status(404).send("Resource not found");
+ res.status(404).send("Resource not found");
 
 });
 
