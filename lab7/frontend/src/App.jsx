@@ -7,7 +7,7 @@ const b1 = {
 };
 
 const b2 = {
-  picUrl: "https://m.media-amazon.com/images/I/518+W2zr3BL._SY385_.jpg",
+  picUrl: "https://m.media-amazon.com/images/I/71CDMyWkq0L._SY385_.jpg",
   bname:"The Road To React",
   price:2886,
   quantity: 3,
