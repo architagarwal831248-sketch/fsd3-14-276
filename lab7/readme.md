@@ -16,3 +16,9 @@
     d. select variant as javascript from arrow key
     e. select esList from arrow key
     f. select install and start the frontend
+
+## component
+1. simple js functions return html directly 
+2. it must starts with capital letter
+3. it should be treated as html tag 
+4. it must be closed 
