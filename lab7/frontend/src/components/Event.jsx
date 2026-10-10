@@ -2,19 +2,19 @@ import React from 'react'
 
 const MyButton = () => {
     const handleClick = ()=>{
-        alert('Button Clicked')
+        alert('Button Clicked!');
     }
-  return <button 
-  style={{ height: "40px",width: "100px"}}
-  onClick={handleClick}>
-    Click me
-    </button>;
+  return ( <button 
+  className="bg-black text-white rounded-md m-4 px=4 py-2">
+    Submit
+    </button>
+  );
 };
 
 const Event = () => {
   return (
     <div>
-      My  Button
+      <My  Button/>
     </div>
   );
 };
